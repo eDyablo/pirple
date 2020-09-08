@@ -3,6 +3,8 @@ package eyablonsky.pirple.java.BasicDataTypes;
 /*
 Homework assignment for the 'Fundamentals of Java' course by Pirple.
 
+Written by Ed Yablonsky.
+
 It prints out the set of the attributes for one favorite song.
 */
 
