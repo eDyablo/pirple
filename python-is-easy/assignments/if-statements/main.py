@@ -6,9 +6,7 @@ and false is none of them are equal to any of the others.
 """
 
 def atLeastTwoAreEqual(First, Second, Third):
-    if int(First) == int(Second):
-        return True
-    elif int(First) == int(Third):
+    if int(First) == int(Second) or int(First) == int(Third):
         return True
     elif int(Second) == int(Third):
         return True
