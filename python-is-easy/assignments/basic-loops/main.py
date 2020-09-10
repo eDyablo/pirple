@@ -23,6 +23,7 @@ for number in range(1, 101):
     for divisor in range(2, number):
         if number % divisor == 0:
             isPrime = False #  mark the number as not a prime
+            break
     if isPrime:
         output += " prime"
     print(output)
