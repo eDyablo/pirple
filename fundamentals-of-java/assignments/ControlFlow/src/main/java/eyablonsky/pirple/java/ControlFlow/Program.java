@@ -34,6 +34,7 @@ public class Program {
             }
             if (isPrime) {
                 output += " prime";
+                break;
             }
             System.out.println(output);
         }
