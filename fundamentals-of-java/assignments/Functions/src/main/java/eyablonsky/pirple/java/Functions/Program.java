@@ -47,14 +47,14 @@ public class Program {
             }
             if (leftChar != rightChar) {
                 // We found difference in characters,
-                // so the input is not a polindrome
+                // so the input is not a palindrome
                 return false;
             }
             // Move both pointers to new characters
             leftIndex++;
             rightIndex--;
         }
-        // If we got to this point than the input is polindrome
+        // If we got to this point than the input is palindrome
         return true;
     }
 
