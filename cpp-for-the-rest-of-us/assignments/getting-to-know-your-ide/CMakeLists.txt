@@ -1,3 +1,1 @@
-project(getting-to-know-your-ide)
-
-add_executable(program main.cpp)
+add_executable(getting-to-know-your-ide main.cpp)

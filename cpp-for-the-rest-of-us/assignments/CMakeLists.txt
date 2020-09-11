@@ -6,3 +6,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(assignments)
 
 add_subdirectory(getting-to-know-your-ide)
+add_subdirectory(data-types-and-variables)
