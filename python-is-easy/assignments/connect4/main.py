@@ -8,7 +8,6 @@ board = [
 ]
 
 players = ['X', 'O']
-lastDroped = []
 player = 0
 roundNumber = 1
 
@@ -45,16 +44,84 @@ def dropTo(column):
     return [0, 0]
 
 def round():
-    global player
-    global roundNumber
-    lastDroped = [0, 0]
-    while lastDroped[0] == 0:
+    droped = [0, 0]
+    while droped[0] == 0:
         displayBoard()
         answer = input('Player ' + players[player] + ': ').strip()
         if answer.isdigit():
-            lastDroped = dropTo(int(answer))
+            droped = dropTo(int(answer))
+    return droped
+
+def countDown(position):
+    row = position[0]
+    column = position[1]
+    symbol = board[row-1][column-1]
+    count = 0
+    for row in range(row, 7):
+        if board[row-1][column-1] != symbol:
+            break
+        count += 1
+    return count
+
+def countLeft(position):
+    row = position[0]
+    column = position[1]
+    symbol = board[row-1][column-1]
+    count = 0
+    for column in range(column, 0, -1):
+        if board[row-1][column-1] != symbol:
+            break
+        count += 1
+    return count
+
+def countRight(position):
+    row = position[0]
+    column = position[1]
+    symbol = board[row-1][column-1]
+    count = 0
+    for column in range(column, 8):
+        if board[row-1][column-1] != symbol:
+            break
+        count += 1
+    return count
+
+def countLeftDiagonal(position):
+    row = position[0]
+    column = position[1]
+    symbol = board[row-1][column-1]
+    count = 0
+    while row < 7 and column > 0:
+        if board[row-1][column-1] != symbol:
+            break
+        count += 1
+        row += 1
+        column -= 1
+    return count
+
+def countRightDiagonal(position):
+    row = position[0]
+    column = position[1]
+    symbol = board[row-1][column-1]
+    count = 0
+    while row < 7 and column < 8:
+        if board[row-1][column-1] != symbol:
+            break
+        count += 1
+        row += 1
+        column += 1
+    return count
+
+def win(position):
+    down = countDown(position)
+    left = countLeft(position)
+    right = countRight(position)
+    ldiag = countLeftDiagonal(position)
+    rdiag = countRightDiagonal(position)
+    return down >= 4 or left >= 4 or right >= 4 or ldiag >= 4 or rdiag >= 4
+
+while win(round()) == False:
     player = nextPlayer(player)
     roundNumber += 1
 
-while True:
-    round()
+displayBoard()
+print('Player ' + players[player] + ' win!')
