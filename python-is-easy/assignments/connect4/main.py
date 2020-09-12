@@ -24,10 +24,7 @@ def displayBoard():
     print('=' * 15)
 
 def nextPlayer(player):
-    if player == 0:
-        return 1
-    else:
-        return 0
+    return (player + 1) % 2
 
 def findEmptyRow(slot):
     for row in range(6, 0, -1):
