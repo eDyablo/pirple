@@ -1,3 +1,12 @@
+'''
+Homework assignment for the 'Python is easy' course by Pirple.
+
+Written be Ed Yablonsky.
+
+Connect4 game.
+'''
+
+# Game board intial state
 board = [
     [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -7,6 +16,7 @@ board = [
     [' ', ' ', ' ', ' ', ' ', ' ', ' '],
 ]
 
+# Gameplay state
 players = ['X', 'O']
 player = 0
 roundNumber = 1
