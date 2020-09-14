@@ -7,3 +7,5 @@ project(assignments)
 
 add_subdirectory(getting-to-know-your-ide)
 add_subdirectory(data-types-and-variables)
+
+add_executable(basic-input-and-output basic-input-and-output/main.cpp)
