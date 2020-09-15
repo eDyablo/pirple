@@ -18,7 +18,7 @@ class Screen:
 
     def draw(self, frame):
         for line in frame:
-            print(line)
+            print(line, end='')
 
 class Input:
     def ask(self, message):
@@ -35,7 +35,7 @@ class Art:
     def load(self, name):
         frames = []
         art_path = join_path(dirname(abspath(__file__)), join_path('arts', name))
-        with open(art_path, 'tr') as art_file:
+        with open(art_path, 'r') as art_file:
             frame_height = int(art_file.readline())
             frame = []
             line_count = 0
@@ -83,7 +83,7 @@ class Riddle:
         return self.solved() == False
 
     def draw(self, screen):
-        screen.draw([' '.join(self.clue)])
+        screen.draw([' '.join(self.clue), '\n'])
 
 class Game:
     def __init__(self):
