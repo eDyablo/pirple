@@ -57,16 +57,30 @@ class Art:
 class Riddle:
     def __init__(self, key):
         self.key = key
-        self.clue = ''
+        self.clue = ['_'] * len(key)
+
+    def length(self):
+        return len(self.key)
+
+    def range(self):
+        return range(0, self.length())
 
     def guess(self, g):
-        pass
+        for i in self.range():
+            if g == self.key[i]:
+                self.clue[i] = g
 
     def solved(self):
-        return self.clue == self.key
+        for i in self.range():
+            if self.clue[i] != self.key[i]:
+                return False
+        return True
 
     def unsolved(self):
         return self.solved() == False
+
+    def draw(self, screen):
+        screen.draw([' '.join(self.clue)])
 
 class Game:
     def __init__(self):
@@ -77,7 +91,7 @@ class Game:
 
     def play(self):
         self.art.load('snowman')
-        self.propose_riddle()
+        #self.propose_riddle()
         while self.in_progress():
             self.play_round()
         self.end()
@@ -91,13 +105,16 @@ class Game:
     def play_round(self):
         self.screen.clear()
         self.art.draw(self.screen)
+        self.riddle.draw(self.screen)
         clue = input('Player 2 guess a letter: ')
-        if clue != '':
-            self.riddle.guess(clue)
+        if len(clue) > 0:
+            self.riddle.guess(clue[0])
             self.art.next_frame()
 
     def end(self):
-        pass
+        self.screen.clear()
+        self.art.draw(self.screen)
+        self.riddle.draw(self.screen)
 
 game = Game()
 game.play()
