@@ -66,9 +66,12 @@ class Riddle:
         return range(0, self.length())
 
     def guess(self, g):
+        guess_count = 0
         for i in self.range():
             if g == self.key[i]:
+                guess_count += 1
                 self.clue[i] = g
+        return guess_count
 
     def solved(self):
         for i in self.range():
@@ -91,7 +94,7 @@ class Game:
 
     def play(self):
         self.art.load('snowman')
-        #self.propose_riddle()
+        self.propose_riddle()
         while self.in_progress():
             self.play_round()
         self.end()
@@ -102,19 +105,20 @@ class Game:
     def in_progress(self):
         return self.riddle.unsolved()
 
-    def play_round(self):
+    def draw_frame(self):
         self.screen.clear()
         self.art.draw(self.screen)
         self.riddle.draw(self.screen)
+
+    def play_round(self):
+        self.draw_frame()
         clue = input('Player 2 guess a letter: ')
         if len(clue) > 0:
-            self.riddle.guess(clue[0])
-            self.art.next_frame()
+            if self.riddle.guess(clue[0]) == 0:
+                self.art.next_frame()
 
     def end(self):
-        self.screen.clear()
-        self.art.draw(self.screen)
-        self.riddle.draw(self.screen)
+        self.draw_frame()
 
 game = Game()
 game.play()
