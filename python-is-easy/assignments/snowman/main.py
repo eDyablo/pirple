@@ -51,8 +51,12 @@ class Art:
     def draw(self, screen):
         screen.draw(self.frames[self.current_frame])
 
+    def frames_number(self):
+        return len(self.frames)
+
     def next_frame(self):
-        self.current_frame = (self.current_frame + 1) % len(self.frames)
+        self.current_frame = (self.current_frame + 1) % self.frames_number()
+        return self.current_frame
 
 class Riddle:
     def __init__(self, key):
@@ -94,6 +98,7 @@ class Game:
 
     def play(self):
         self.art.load('snowman')
+        self.game_over = False
         self.propose_riddle()
         while self.in_progress():
             self.play_round()
@@ -103,7 +108,7 @@ class Game:
         self.riddle = Riddle(self.input.ask('Player 1 pick a word: '))
 
     def in_progress(self):
-        return self.riddle.unsolved()
+        return self.riddle.unsolved() and self.game_over == False
 
     def draw_frame(self):
         self.screen.clear()
@@ -116,9 +121,15 @@ class Game:
         if len(clue) > 0:
             if self.riddle.guess(clue[0]) == 0:
                 self.art.next_frame()
+        if self.art.current_frame == self.art.frames_number() - 1:
+            self.game_over = True
 
     def end(self):
         self.draw_frame()
+        if self.game_over:
+            self.screen.draw(['Player 2 won', '\n'])
+        else:
+            self.screen.draw(['Player 2 lost', '\n'])
 
 game = Game()
 game.play()
