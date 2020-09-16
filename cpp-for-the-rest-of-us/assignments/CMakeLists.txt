@@ -5,8 +5,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(assignments)
 
-add_subdirectory(getting-to-know-your-ide)
-add_subdirectory(data-types-and-variables)
+add_executable(getting-to-know-your-ide getting-to-know-your-ide/main.cpp)
+
+add_executable(data-types-and-variables data-types-and-variables/main.cpp)
 
 add_executable(basic-input-and-output basic-input-and-output/main.cpp)
 
