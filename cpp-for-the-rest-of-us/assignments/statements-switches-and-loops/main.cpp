@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-  cout << "Think of a number between 1 and 100dd" << endl;
+  cout << "Think of a number between 1 and 100" << endl;
   int highest = 100, lowest = 0, attempts = 0;
   while (true) {
     ++attempts;
