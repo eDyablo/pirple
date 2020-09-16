@@ -18,7 +18,7 @@ class Screen:
 
     def draw(self, frame):
         for line in frame:
-            print(line, end='')
+            print(line)
 
 class Input:
     def ask(self, message):
@@ -40,7 +40,7 @@ class Art:
             frame = []
             line_count = 0
             for line in art_file:
-                frame.append(line)
+                frame.append(line.strip('\n\r'))
                 line_count += 1
                 if line_count % frame_height == 0:
                     frames.append(frame)
@@ -87,7 +87,7 @@ class Riddle:
         return self.solved() == False
 
     def draw(self, screen):
-        screen.draw([' '.join(self.clue), '\n'])
+        screen.draw([' '.join(self.clue)])
 
 class Game:
     def __init__(self):
@@ -119,17 +119,22 @@ class Game:
         self.draw_frame()
         clue = input('Player 2 guess a letter: ')
         if len(clue) > 0:
-            if self.riddle.guess(clue[0]) == 0:
+            if clue[0] == '.':
+                self.stop()
+            elif self.riddle.guess(clue[0]) == 0:
                 self.art.next_frame()
         if self.art.current_frame == self.art.frames_number() - 1:
-            self.game_over = True
+            self.stop()
+
+    def stop(self):
+        self.game_over = True
 
     def end(self):
         self.draw_frame()
         if self.game_over:
-            self.screen.draw(['Player 2 won', '\n'])
+            self.screen.draw(['Player 2 lost'])
         else:
-            self.screen.draw(['Player 2 lost', '\n'])
+            self.screen.draw(['Player 2 wins'])
 
 game = Game()
 game.play()
