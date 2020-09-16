@@ -42,7 +42,7 @@ class Input:
         return answer
 
 '''
-Art is a game art is a set of frames that get loaded from a text file.
+Art is a game art which is set of frames that get loaded from a text file.
 Draws its current frame on a screen.
 '''
 class Art:
