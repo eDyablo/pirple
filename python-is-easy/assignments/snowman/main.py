@@ -1,3 +1,11 @@
+'''
+Homework assignment for the 'Python is easy' course by Pirple.
+
+Written be Ed Yablonsky.
+
+Snowman(Hangman) game.
+'''
+
 from os import (
     name as os_name,
     system as system_call,
@@ -9,6 +17,9 @@ from os.path import (
     join as join_path,
 )
 
+'''
+Screen displays game output
+'''
 class Screen:
     def clear(self):
         if os_name == 'nt':
@@ -20,6 +31,9 @@ class Screen:
         for line in frame:
             print(line)
 
+'''
+Input represents game input device
+'''
 class Input:
     def ask(self, message):
         answer = ''
@@ -27,6 +41,10 @@ class Input:
             answer = input(message)
         return answer
 
+'''
+Art is a game art is a set of frames that get loaded from a text file.
+Draws its current frame on a screen.
+'''
 class Art:
     def __init__(self):
         self.frames = []
@@ -58,6 +76,9 @@ class Art:
         self.current_frame = (self.current_frame + 1) % self.frames_number()
         return self.current_frame
 
+'''
+Riddle holds secret word and gets solved by guesses
+'''
 class Riddle:
     def __init__(self, key):
         self.key = key
@@ -89,6 +110,9 @@ class Riddle:
     def draw(self, screen):
         screen.draw([' '.join(self.clue)])
 
+'''
+Game is a game itself
+'''
 class Game:
     def __init__(self):
         self.screen = Screen()
@@ -102,10 +126,10 @@ class Game:
         self.propose_riddle()
         while self.in_progress():
             self.play_round()
-        self.end()
+        self.display_result()
 
     def propose_riddle(self):
-        self.riddle = Riddle(self.input.ask('Player 1 pick a word: '))
+        self.riddle = Riddle(self.input.ask('Player 1 pick a word: ').lower())
 
     def in_progress(self):
         return self.riddle.unsolved() and self.game_over == False
@@ -117,7 +141,7 @@ class Game:
 
     def play_round(self):
         self.draw_frame()
-        clue = input('Player 2 guess a letter: ')
+        clue = input('Player 2 guess a letter: ').lower()
         if len(clue) > 0:
             if clue[0] == '.':
                 self.stop()
@@ -129,12 +153,11 @@ class Game:
     def stop(self):
         self.game_over = True
 
-    def end(self):
+    def display_result(self):
         self.draw_frame()
         if self.game_over:
             self.screen.draw(['Player 2 lost'])
         else:
             self.screen.draw(['Player 2 wins'])
 
-game = Game()
-game.play()
+Game().play()
