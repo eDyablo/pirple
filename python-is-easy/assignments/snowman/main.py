@@ -121,12 +121,15 @@ class Game:
         self.riddle = Riddle('riddle')
 
     def play(self):
-        self.art.load('snowman')
-        self.game_over = False
+        self.start()
         self.propose_riddle()
         while self.in_progress():
             self.play_round()
         self.display_result()
+
+    def start(self):
+        self.art.load('snowman')
+        self.game_over = False
 
     def propose_riddle(self):
         self.riddle = Riddle(self.input.ask('Player 1 pick a word: ').lower())
