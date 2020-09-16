@@ -14,3 +14,5 @@ add_executable(basic-input-and-output basic-input-and-output/main.cpp)
 add_executable(conventions-and-operators conventions-and-operators/main.cpp)
 
 add_executable(statements-switches-and-loops statements-switches-and-loops/main.cpp)
+
+add_executable(tic-tac-toe tic-tac-toe/main.cpp)
