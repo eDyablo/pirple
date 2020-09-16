@@ -7,8 +7,9 @@ int main() {
   char PLAYER_X = 'X', PLAYER_O = 'O';
   char lastPlayer = PLAYER_O, currentPlayer = PLAYER_X;
   char board[] = { '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-
+  // Main loop
   for (int turn = 1; turn <= 10; ++turn) {
+    // Display the current board state
     cout << endl << "current board state:" << endl;
     for (int y = 0; y < 3; ++y) {
       cout << setw(4) << ' ';
@@ -21,7 +22,7 @@ int main() {
       }
     }
     cout << endl;
-
+    // Check for a winner
     if (board[0] == lastPlayer && board[1] == lastPlayer && board[2] == lastPlayer) {
       cout << "Player " << lastPlayer << " win on the top row!" << endl; break;
     } else if (board[3] == lastPlayer && board[4] == lastPlayer && board[5] == lastPlayer) {
@@ -39,7 +40,7 @@ int main() {
     } else if (board[6] == lastPlayer && board[4] == lastPlayer && board[2] == lastPlayer) {
       cout << "Player " << lastPlayer << " win on the upward diagonal!" << endl; break;
     }
-
+    // Handle player input
     while (turn < 10) {
       int chosenSquare = 0;
       cout << "Player " << currentPlayer << ", enter a number between 1 and 9: ";
@@ -53,11 +54,9 @@ int main() {
         break;
       }
     }
-
+    // Switch players
     swap(currentPlayer, lastPlayer);
   }
-
   cout << endl << endl;
-
   return 0;
 }
