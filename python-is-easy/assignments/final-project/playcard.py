@@ -1,12 +1,12 @@
 from random import shuffle
 
 class Suite:
-  def __init__(self, name, symbol):
+  def __init__(self, name, pip):
     self.__name = name
-    self.__symbol = symbol
+    self.__pip = pip
 
   def __str__(self):
-    return str(self.__symbol)
+    return str(self.__pip)
 
 class Card:
   def __init__(self, suite, rank, face):
@@ -32,6 +32,9 @@ class Deck:
 
   def shuffle(self):
     shuffle(self.__cards)
+
+  def draw(self):
+    return self.__cards.pop()
 
 class EnglishPattern:
   def __init__(self):
